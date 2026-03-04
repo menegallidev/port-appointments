@@ -103,7 +103,7 @@ export default function AdminAppointmentsPage() {
 
       setAppointments(data.appointments ?? []);
     } catch {
-      toast.error("Erro de conexao ao carregar agendamentos.");
+      toast.error("Erro de conexão ao carregar agendamentos.");
     } finally {
       setLoading(false);
     }
@@ -132,7 +132,7 @@ export default function AdminAppointmentsPage() {
       toast.success("Status atualizado com sucesso.");
       await fetchAppointments(filter);
     } catch {
-      toast.error("Erro de conexao ao atualizar status.");
+      toast.error("Erro de conexão ao atualizar status.");
     } finally {
       setUpdatingId(null);
     }

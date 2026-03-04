@@ -43,7 +43,7 @@ export default function LoginPage() {
 
       const data = (await response.json()) as LoginResponse;
       if (!response.ok) {
-        toast.error(data.error ?? "Nao foi possivel entrar.");
+        toast.error(data.error ?? "Não foi possível entrar.");
         return;
       }
 
@@ -59,7 +59,7 @@ export default function LoginPage() {
       }
       router.refresh();
     } catch {
-      toast.error("Erro de conexao. Tente novamente.");
+      toast.error("Erro de conexão. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -108,14 +108,14 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-4 text-sm text-muted-foreground">
-            Nao possui conta?{" "}
+            Não possui conta?{" "}
             <Link href="/cadastro" className="font-medium text-foreground">
               Criar conta
             </Link>
           </p>
 
           <div className="mt-6 rounded-md border border-dashed bg-muted/50 p-3 text-sm">
-            <p className="font-medium">Nota para portfolio</p>
+            <p className="font-medium">Nota para portfólio</p>
             <p className="text-muted-foreground">
               Admin demo: <span className="font-medium">admin@barbearia.local</span>
             </p>

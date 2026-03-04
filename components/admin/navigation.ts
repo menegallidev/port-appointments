@@ -13,7 +13,7 @@ export const adminNavigation = [
   },
   {
     href: "/admin/servicos",
-    label: "Servicos",
+    label: "Serviços",
     icon: Scissors,
   },
   {

@@ -69,7 +69,7 @@ export default function DashboardPage() {
 
         setData(json);
       } catch {
-        const message = "Erro de conexao ao carregar dashboard.";
+        const message = "Erro de conexão ao carregar dashboard.";
         setError(message);
         toast.error(message);
       } finally {

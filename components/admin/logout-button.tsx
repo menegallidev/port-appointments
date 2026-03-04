@@ -19,14 +19,14 @@ export function LogoutButton() {
       const response = await fetch("/api/auth/logout", { method: "POST" });
 
       if (!response.ok) {
-        toast.error("Nao foi possivel encerrar a sessao.");
+        toast.error("Não foi possível encerrar a sessão.");
         return;
       }
 
-      toast.success("Sessao encerrada com sucesso.");
+      toast.success("Sessão encerrada com sucesso.");
       shouldRedirect = true;
     } catch {
-      toast.error("Erro de conexao ao encerrar a sessao.");
+      toast.error("Erro de conexão ao encerrar a sessão.");
     } finally {
       setLoading(false);
 

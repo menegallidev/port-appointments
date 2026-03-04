@@ -58,13 +58,13 @@ export default function AdminServicesPage() {
       const data = (await response.json()) as ServicesResponse;
 
       if (!response.ok) {
-        toast.error(data.error ?? "Erro ao carregar servicos.");
+        toast.error(data.error ?? "Erro ao carregar serviços.");
         return;
       }
 
       setServices(data.services ?? []);
     } catch {
-      toast.error("Erro de conexao ao carregar servicos.");
+      toast.error("Erro de conexão ao carregar serviços.");
     } finally {
       setLoading(false);
     }
@@ -93,18 +93,18 @@ export default function AdminServicesPage() {
 
       const data = (await response.json()) as { error?: string; message?: string };
       if (!response.ok) {
-        toast.error(data.error ?? "Erro ao cadastrar servico.");
+        toast.error(data.error ?? "Erro ao cadastrar serviço.");
         return;
       }
 
-      toast.success(data.message ?? "Servico cadastrado com sucesso.");
+      toast.success(data.message ?? "Serviço cadastrado com sucesso.");
       setName("");
       setDescription("");
       setDurationMinutes("45");
       setPrice("45");
       await loadServices();
     } catch {
-      toast.error("Erro de conexao ao cadastrar servico.");
+      toast.error("Erro de conexão ao cadastrar serviço.");
     } finally {
       setSubmitting(false);
     }
@@ -122,14 +122,14 @@ export default function AdminServicesPage() {
 
       const data = (await response.json()) as { error?: string; message?: string };
       if (!response.ok) {
-        toast.error(data.error ?? "Erro ao atualizar servico.");
+        toast.error(data.error ?? "Erro ao atualizar serviço.");
         return;
       }
 
-      toast.success(data.message ?? "Servico atualizado com sucesso.");
+      toast.success(data.message ?? "Serviço atualizado com sucesso.");
       await loadServices();
     } catch {
-      toast.error("Erro de conexao ao atualizar servico.");
+      toast.error("Erro de conexão ao atualizar serviço.");
     } finally {
       setTogglingId(null);
     }
@@ -139,7 +139,7 @@ export default function AdminServicesPage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Cadastrar Servico</CardTitle>
+          <CardTitle>Cadastrar Serviço</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
@@ -154,7 +154,7 @@ export default function AdminServicesPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="duration">Duracao (min)</Label>
+              <Label htmlFor="duration">Duração (min)</Label>
               <Input
                 id="duration"
                 type="number"
@@ -168,7 +168,7 @@ export default function AdminServicesPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="price">Preco (R$)</Label>
+              <Label htmlFor="price">Preço (R$)</Label>
               <Input
                 id="price"
                 type="number"
@@ -181,7 +181,7 @@ export default function AdminServicesPage() {
             </div>
 
             <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="description">Descricao (opcional)</Label>
+              <Label htmlFor="description">Descrição (opcional)</Label>
               <Textarea
                 id="description"
                 rows={3}
@@ -198,7 +198,7 @@ export default function AdminServicesPage() {
                     Salvando...
                   </>
                 ) : (
-                  "Salvar servico"
+                  "Salvar serviço"
                 )}
               </Button>
             </div>
@@ -208,7 +208,7 @@ export default function AdminServicesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Servicos Cadastrados</CardTitle>
+          <CardTitle>Serviços Cadastrados</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
@@ -219,18 +219,18 @@ export default function AdminServicesPage() {
               <Skeleton className="h-12 w-full" />
             </div>
           ) : services.length === 0 ? (
-            <p className="text-muted-foreground">Nenhum servico cadastrado.</p>
+            <p className="text-muted-foreground">Nenhum serviço cadastrado.</p>
           ) : (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Servico</TableHead>
-                    <TableHead>Duracao</TableHead>
-                    <TableHead>Preco</TableHead>
+                    <TableHead>Serviço</TableHead>
+                    <TableHead>Duração</TableHead>
+                    <TableHead>Preço</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Agendamentos</TableHead>
-                    <TableHead>Acoes</TableHead>
+                    <TableHead>Ações</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -239,7 +239,7 @@ export default function AdminServicesPage() {
                       <TableCell>
                         <p className="font-medium">{service.name}</p>
                         <p className="text-xs text-muted-foreground">
-                          {service.description || "Sem descricao"}
+                          {service.description || "Sem descrição"}
                         </p>
                       </TableCell>
                       <TableCell>{service.durationMinutes} min</TableCell>

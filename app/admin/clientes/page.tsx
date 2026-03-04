@@ -61,7 +61,7 @@ export default function AdminCustomersPage() {
 
       setCustomers(data.customers ?? []);
     } catch {
-      toast.error("Erro de conexao ao carregar clientes.");
+      toast.error("Erro de conexão ao carregar clientes.");
     } finally {
       setLoading(false);
     }
@@ -95,7 +95,7 @@ export default function AdminCustomersPage() {
       setNotes("");
       await loadCustomers();
     } catch {
-      toast.error("Erro de conexao ao cadastrar cliente.");
+      toast.error("Erro de conexão ao cadastrar cliente.");
     } finally {
       setSubmitting(false);
     }

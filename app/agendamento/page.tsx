@@ -150,7 +150,7 @@ export default function AppointmentPage() {
         await loadUserAppointments();
       }
     } catch {
-      toast.error("Nao foi possivel carregar os dados do agendamento.");
+      toast.error("Não foi possível carregar os dados do agendamento.");
     } finally {
       setFetching(false);
     }
@@ -171,7 +171,7 @@ export default function AppointmentPage() {
       }
 
       if (!appointmentTime) {
-        toast.error("Selecione um horario para o agendamento.");
+        toast.error("Selecione um horário para o agendamento.");
         return;
       }
 
@@ -201,7 +201,7 @@ export default function AppointmentPage() {
 
       const data = (await response.json()) as { error?: string; message?: string };
       if (!response.ok) {
-        toast.error(data.error ?? "Nao foi possivel criar o agendamento.");
+        toast.error(data.error ?? "Não foi possível criar o agendamento.");
         return;
       }
 
@@ -220,7 +220,7 @@ export default function AppointmentPage() {
         await loadUserAppointments();
       }
     } catch {
-      toast.error("Erro de conexao. Tente novamente.");
+      toast.error("Erro de conexão. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -250,15 +250,15 @@ export default function AppointmentPage() {
         <section className="space-y-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="space-y-2">
-              <h1 className="text-3xl font-semibold">Agendar horario</h1>
+              <h1 className="text-3xl font-semibold">Agendar horário</h1>
               <p className="text-muted-foreground">
                 {user
-                  ? `Ola, ${user.name}. Escolha o servico e confirme o horario.`
-                  : "Voce pode agendar como visitante ou criar uma conta para acompanhar seus horarios."}
+                  ? `Olá, ${user.name}. Escolha o serviço e confirme o horário.`
+                  : "Você pode agendar como visitante ou criar uma conta para acompanhar seus horários."}
               </p>
               {!user ? (
                 <p className="text-sm text-muted-foreground">
-                  Ja possui conta?{" "}
+                  Já possui conta?{" "}
                   <Link href="/login" className="font-medium text-foreground">
                     Entrar
                   </Link>{" "}
@@ -347,10 +347,10 @@ export default function AppointmentPage() {
                 ) : null}
 
                 <div className="space-y-2">
-                  <Label>Servico</Label>
+                  <Label>Serviço</Label>
                   <Select value={serviceId} onValueChange={setServiceId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione um servico" />
+                      <SelectValue placeholder="Selecione um serviço" />
                     </SelectTrigger>
                     <SelectContent>
                       {services.map((service) => (
@@ -399,7 +399,7 @@ export default function AppointmentPage() {
                     <Label>Hora</Label>
                     <Select value={appointmentTime} onValueChange={setAppointmentTime}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione o horario" />
+                        <SelectValue placeholder="Selecione o horário" />
                       </SelectTrigger>
                       <SelectContent>
                         {timeOptions.map((time) => (
@@ -413,7 +413,7 @@ export default function AppointmentPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="notes">Observacoes (opcional)</Label>
+                  <Label htmlFor="notes">Observações (opcional)</Label>
                   <Textarea
                     id="notes"
                     value={notes}
@@ -440,14 +440,14 @@ export default function AppointmentPage() {
         <section className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Resumo do servico</CardTitle>
+              <CardTitle>Resumo do serviço</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               {selectedService ? (
                 <>
                   <p className="font-medium">{selectedService.name}</p>
                   <p className="text-muted-foreground">
-                    Duracao: {selectedService.durationMinutes} minutos
+                    Duração: {selectedService.durationMinutes} minutos
                   </p>
                   <p className="text-muted-foreground">
                     Valor: {formatCurrency(Number(selectedService.price))}
@@ -460,7 +460,7 @@ export default function AppointmentPage() {
                 </>
               ) : (
                 <p className="text-muted-foreground">
-                  Selecione um servico para ver os detalhes.
+                  Selecione um serviço para ver os detalhes.
                 </p>
               )}
             </CardContent>
@@ -480,14 +480,14 @@ export default function AppointmentPage() {
                   </div>
                 ) : appointments.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
-                    Voce ainda nao possui agendamentos.
+                    Você ainda não possui agendamentos.
                   </p>
                 ) : (
                   <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Servico</TableHead>
+                          <TableHead>Serviço</TableHead>
                           <TableHead>Data</TableHead>
                           <TableHead>Status</TableHead>
                         </TableRow>
@@ -504,7 +504,7 @@ export default function AppointmentPage() {
                             <TableCell>
                               {format(
                                 new Date(appointment.appointmentAt),
-                                "dd/MM/yyyy 'as' HH:mm",
+                                "dd/MM/yyyy 'às' HH:mm",
                               )}
                             </TableCell>
                             <TableCell>

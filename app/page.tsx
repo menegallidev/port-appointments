@@ -6,21 +6,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const highlights = [
   {
-    title: "Agendamento Rapido",
+    title: "Agendamento Rápido",
     description:
       "Clientes podem agendar com conta ou como visitante em poucos passos.",
     icon: CalendarClock,
   },
   {
-    title: "Gestao de Clientes",
+    title: "Gestão de Clientes",
     description:
-      "Cadastro e historico de clientes para aumentar retencao e recorrencia.",
+      "Cadastro e histórico de clientes para aumentar retenção e recorrência.",
     icon: UserPlus,
   },
   {
-    title: "Dashboard Estrategico",
+    title: "Dashboard Estratégico",
     description:
-      "Visualize volume de atendimentos, aprovacao e receita em tempo real.",
+      "Visualize volume de atendimentos, aprovação e receita em tempo real.",
     icon: BarChart3,
   },
 ];
@@ -37,14 +37,14 @@ export default function HomePage() {
             Sistema completo de agendamento para sua barbearia.
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            Cadastre usuarios, receba agendamentos com ou sem conta, aprove
-            horarios pelo painel administrativo e acompanhe indicadores no
+            Cadastre usuários, receba agendamentos com ou sem conta, aprove
+            horários pelo painel administrativo e acompanhe indicadores no
             dashboard.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link href="/agendamento">Agendar horario</Link>
+              <Link href="/agendamento">Agendar horário</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/cadastro">Criar conta</Link>
@@ -57,7 +57,7 @@ export default function HomePage() {
           <div className="mt-6 max-w-md rounded-lg border border-dashed bg-muted/50 p-4 text-sm">
             <p className="font-medium">Acesso admin (demo)</p>
             <p className="text-muted-foreground">
-              Usuario: <span className="font-medium">admin@barbearia.local</span>
+              Usuário: <span className="font-medium">admin@barbearia.local</span>
             </p>
             <p className="text-muted-foreground">
               Senha: <span className="font-medium">admin123</span>
