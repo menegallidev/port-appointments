@@ -15,6 +15,7 @@ import {
 } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatCurrency } from "@/lib/format";
 
 type DashboardData = {
@@ -113,7 +114,27 @@ export default function DashboardPage() {
   }, [data]);
 
   if (loading) {
-    return <p className="text-muted-foreground">Carregando dashboard...</p>;
+    return (
+      <div className="space-y-6">
+        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <Card key={`dashboard-loading-metric-${index.toString()}`}>
+              <CardHeader>
+                <Skeleton className="h-4 w-24" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-20" />
+              </CardContent>
+            </Card>
+          ))}
+        </section>
+        <section className="grid gap-4 xl:grid-cols-2">
+          <Skeleton className="h-72 w-full" />
+          <Skeleton className="h-72 w-full" />
+        </section>
+        <Skeleton className="h-80 w-full" />
+      </div>
+    );
   }
 
   if (error || !data) {

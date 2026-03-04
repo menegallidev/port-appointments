@@ -29,6 +29,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import { formatCurrency } from "@/lib/format";
 import { formatPhoneMask } from "@/lib/phone";
 import { cn } from "@/lib/utils";
@@ -101,6 +103,7 @@ export default function AppointmentPage() {
 
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(false);
 
   const requiresPhoneForLoggedUser = Boolean(user && !user.phone);
 
@@ -110,13 +113,18 @@ export default function AppointmentPage() {
   );
 
   const loadUserAppointments = useCallback(async () => {
-    const response = await fetch("/api/appointments");
-    if (!response.ok) {
-      return;
-    }
+    try {
+      setAppointmentsLoading(true);
+      const response = await fetch("/api/appointments");
+      if (!response.ok) {
+        return;
+      }
 
-    const data = (await response.json()) as { appointments: Appointment[] };
-    setAppointments(data.appointments);
+      const data = (await response.json()) as { appointments: Appointment[] };
+      setAppointments(data.appointments);
+    } finally {
+      setAppointmentsLoading(false);
+    }
   }, []);
 
   const loadInitialData = useCallback(async () => {
@@ -220,8 +228,18 @@ export default function AppointmentPage() {
 
   if (fetching) {
     return (
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-10">
-        <p className="text-muted-foreground">Carregando...</p>
+      <div className="min-h-screen bg-muted/20">
+        <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 lg:grid-cols-[1.2fr_1fr]">
+          <section className="space-y-6">
+            <Skeleton className="h-10 w-72" />
+            <Skeleton className="h-5 w-full max-w-xl" />
+            <Skeleton className="h-72 w-full" />
+          </section>
+          <section className="space-y-4">
+            <Skeleton className="h-48 w-full" />
+            <Skeleton className="h-64 w-full" />
+          </section>
+        </main>
       </div>
     );
   }
@@ -405,7 +423,14 @@ export default function AppointmentPage() {
                 </div>
 
                 <Button type="submit" disabled={loading || !serviceId}>
-                  {loading ? "Enviando..." : "Confirmar agendamento"}
+                  {loading ? (
+                    <>
+                      <Spinner />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Confirmar agendamento"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -447,7 +472,13 @@ export default function AppointmentPage() {
                 <CardTitle>Meus agendamentos</CardTitle>
               </CardHeader>
               <CardContent>
-                {appointments.length === 0 ? (
+                {appointmentsLoading ? (
+                  <div className="space-y-3">
+                    <Skeleton className="h-12 w-full" />
+                    <Skeleton className="h-12 w-full" />
+                    <Skeleton className="h-12 w-full" />
+                  </div>
+                ) : appointments.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
                     Voce ainda nao possui agendamentos.
                   </p>

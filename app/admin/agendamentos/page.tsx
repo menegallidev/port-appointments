@@ -22,6 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import { formatPhoneMask } from "@/lib/phone";
 
 type AppointmentStatus =
@@ -144,6 +146,7 @@ export default function AdminAppointmentsPage() {
           <Select
             value={filter}
             onValueChange={(value) => setFilter(value as "ALL" | AppointmentStatus)}
+            disabled={loading}
           >
             <SelectTrigger>
               <SelectValue />
@@ -160,7 +163,12 @@ export default function AdminAppointmentsPage() {
       </CardHeader>
       <CardContent>
         {loading ? (
-          <p className="text-muted-foreground">Carregando agendamentos...</p>
+          <div className="space-y-3">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
         ) : appointments.length === 0 ? (
           <p className="text-muted-foreground">Nenhum agendamento encontrado.</p>
         ) : (
@@ -211,7 +219,14 @@ export default function AdminAppointmentsPage() {
                               }
                               disabled={updatingId === appointment.id}
                             >
-                              {action.label}
+                              {updatingId === appointment.id ? (
+                                <>
+                                  <Spinner />
+                                  Atualizando...
+                                </>
+                              ) : (
+                                action.label
+                              )}
                             </Button>
                           ))
                         )}

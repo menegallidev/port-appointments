@@ -54,3 +54,31 @@ export const customerCreateSchema = z.object({
 export const appointmentStatusSchema = z.object({
   status: z.enum(["PENDING", "APPROVED", "REJECTED", "CANCELLED", "COMPLETED"]),
 });
+
+export const serviceCreateSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Nome deve ter pelo menos 2 caracteres.")
+    .max(80, "Nome muito longo."),
+  description: z
+    .string()
+    .trim()
+    .max(300, "Descrição muito longa.")
+    .optional()
+    .or(z.literal("")),
+  durationMinutes: z.coerce
+    .number()
+    .int("Duração deve ser um número inteiro.")
+    .min(10, "Duração mínima de 10 minutos.")
+    .max(240, "Duração máxima de 240 minutos."),
+  price: z.coerce
+    .number()
+    .positive("Preço deve ser maior que zero.")
+    .max(10000, "Preço muito alto."),
+  isActive: z.boolean().optional().default(true),
+});
+
+export const serviceStatusSchema = z.object({
+  isActive: z.boolean(),
+});

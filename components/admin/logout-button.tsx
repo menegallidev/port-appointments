@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 export function LogoutButton() {
   const router = useRouter();
@@ -38,7 +39,14 @@ export function LogoutButton() {
 
   return (
     <Button variant="outline" onClick={handleLogout} disabled={loading}>
-      {loading ? "Saindo..." : "Sair"}
+      {loading ? (
+        <>
+          <Spinner />
+          Saindo...
+        </>
+      ) : (
+        "Sair"
+      )}
     </Button>
   );
 }

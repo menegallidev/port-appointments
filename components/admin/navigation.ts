@@ -12,6 +12,11 @@ export const adminNavigation = [
     icon: CalendarClock,
   },
   {
+    href: "/admin/servicos",
+    label: "Servicos",
+    icon: Scissors,
+  },
+  {
     href: "/admin/clientes",
     label: "Clientes",
     icon: Users,

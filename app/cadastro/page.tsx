@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { formatPhoneMask } from "@/lib/phone";
 
 type RegisterResponse = {
@@ -123,7 +124,14 @@ export default function RegisterPage() {
               />
             </div>
             <Button className="w-full" type="submit" disabled={loading}>
-              {loading ? "Criando conta..." : "Criar conta"}
+              {loading ? (
+                <>
+                  <Spinner />
+                  Criando conta...
+                </>
+              ) : (
+                "Criar conta"
+              )}
             </Button>
           </form>
 

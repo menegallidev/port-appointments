@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -154,7 +156,14 @@ export default function AdminCustomersPage() {
 
             <div className="md:col-span-2">
               <Button type="submit" disabled={submitting}>
-                {submitting ? "Salvando..." : "Salvar cliente"}
+                {submitting ? (
+                  <>
+                    <Spinner />
+                    Salvando...
+                  </>
+                ) : (
+                  "Salvar cliente"
+                )}
               </Button>
             </div>
           </form>
@@ -167,7 +176,12 @@ export default function AdminCustomersPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground">Carregando clientes...</p>
+            <div className="space-y-3">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
+            </div>
           ) : customers.length === 0 ? (
             <p className="text-muted-foreground">Nenhum cliente cadastrado.</p>
           ) : (
