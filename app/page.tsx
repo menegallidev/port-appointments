@@ -6,21 +6,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const highlights = [
   {
-    title: "Agendamento Rápido",
+    title: "Agendamento Rapido",
     description:
       "Clientes podem agendar com conta ou como visitante em poucos passos.",
     icon: CalendarClock,
   },
   {
-    title: "Gestão de Clientes",
+    title: "Gestao de Clientes",
     description:
-      "Cadastro e histórico de clientes para aumentar retenção e recorrência.",
+      "Cadastro e historico de clientes para aumentar retencao e recorrencia.",
     icon: UserPlus,
   },
   {
-    title: "Dashboard Estratégico",
+    title: "Dashboard Estrategico",
     description:
-      "Visualize volume de atendimentos, aprovação e receita em tempo real.",
+      "Visualize volume de atendimentos, aprovacao e receita em tempo real.",
     icon: BarChart3,
   },
 ];
@@ -37,13 +37,14 @@ export default function HomePage() {
             Sistema completo de agendamento para sua barbearia.
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            Cadastre usuários, receba agendamentos com ou sem conta, aprove
-            horários pelo painel administrativo e acompanhe indicadores no
+            Cadastre usuarios, receba agendamentos com ou sem conta, aprove
+            horarios pelo painel administrativo e acompanhe indicadores no
             dashboard.
           </p>
+
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link href="/agendamento">Agendar horário</Link>
+              <Link href="/agendamento">Agendar horario</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/cadastro">Criar conta</Link>
@@ -52,11 +53,22 @@ export default function HomePage() {
               <Link href="/admin/dashboard">Ir para painel</Link>
             </Button>
           </div>
+
+          <div className="mt-6 max-w-md rounded-lg border border-dashed bg-muted/50 p-4 text-sm">
+            <p className="font-medium">Acesso admin (demo)</p>
+            <p className="text-muted-foreground">
+              Usuario: <span className="font-medium">admin@barbearia.local</span>
+            </p>
+            <p className="text-muted-foreground">
+              Senha: <span className="font-medium">admin123</span>
+            </p>
+          </div>
         </section>
 
         <section className="grid gap-4 md:grid-cols-3">
           {highlights.map((item) => {
             const Icon = item.icon;
+
             return (
               <Card key={item.title}>
                 <CardHeader>
