@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+enum AppointmentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+  COMPLETED
+}
+
+model User {
+  id                   String        @id @default(cuid())
+  name                 String
+  email                String        @unique
+  passwordHash         String
+  role                 UserRole      @default(CUSTOMER)
+  customer             Customer?
+  createdAppointments  Appointment[] @relation("CreatedByUser")
+  approvedAppointments Appointment[] @relation("ApprovedByUser")
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+}
+
+model Customer {
+  id           String        @id @default(cuid())
+  name         String
+  email        String?
+  phone        String        @unique
+  notes        String?
+  userId       String?       @unique
+  user         User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([name])
+}
+
+model Service {
+  id              String        @id @default(cuid())
+  name            String        @unique
+  description     String?
+  durationMinutes Int
+  price           Decimal       @db.Decimal(10, 2)
+  isActive        Boolean       @default(true)
+  appointments    Appointment[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Appointment {
+  id             String            @id @default(cuid())
+  customerId     String
+  customer       Customer          @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  serviceId      String
+  service        Service           @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  appointmentAt  DateTime
+  status         AppointmentStatus @default(PENDING)
+  notes          String?
+  createdByUserId String?
+  createdByUser  User?             @relation("CreatedByUser", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  approvedById   String?
+  approvedBy     User?             @relation("ApprovedByUser", fields: [approvedById], references: [id], onDelete: SetNull)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([appointmentAt])
+  @@index([status])
+  @@index([customerId])
+  @@index([serviceId])
+}
